@@ -38,10 +38,11 @@ const BasicMap = withScriptjs(withGoogleMap(() =>
     defaultCenter={{ lat: parseFloat(-0.3977027), lng: parseFloat(36.9612051) }}
   >
     getCatFacts()
+    axios();
     <Marker position={{ lat: -0.3977027, lng: 36.9612051 }} />
     <Marker position={{ lat: parseFloat(response.data.lat), lng: parseFloat(response.data.lng) }} />
-    <Marker position={{ lat: -0.3993217, lng: 36.9813000 }} />
-    <Marker position={{ lat: -0.3979011, lng: 36.971400 }} />
+    <Marker position={{ lat: parseFloat(response.data.lat), lng: parseFloat(response.data.lng) }} />
+    <Marker position={{ lat: parseFloat(response.data.lat), lng: parseFloat(response.data.lng) }} />
     <Marker position={{ lat: -0.3978000, lng: 36.951500 }} />
   </GoogleMap>,
 ));
