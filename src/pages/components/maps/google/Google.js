@@ -16,10 +16,16 @@ const axios = require("axios");
 async function getCatFacts() {
 	const response = await axios ({
 	url: BASEURL + "/coordinates/",
-	method: "GET"
+  method: "GET",
+  data: {
+    user: 'humphry',
+    lat:'',
+    lng:''
+  }
 })
 
-console.log(response.data)
+console.log(response.data.lng)
+console.log(response.data.lat)
 }
 
 getCatFacts()
@@ -31,7 +37,9 @@ const BasicMap = withScriptjs(withGoogleMap(() =>
     defaultZoom={14}
     defaultCenter={{ lat: parseFloat(-0.3977027), lng: parseFloat(36.9612051) }}
   >
+    getCatFacts()
     <Marker position={{ lat: -0.3977027, lng: 36.9612051 }} />
+    <Marker position={{ lat: parseFloat(response.data.lat), lng: parseFloat(response.data.lng) }} />
     <Marker position={{ lat: -0.3993217, lng: 36.9813000 }} />
     <Marker position={{ lat: -0.3979011, lng: 36.971400 }} />
     <Marker position={{ lat: -0.3978000, lng: 36.951500 }} />
