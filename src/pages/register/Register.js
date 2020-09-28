@@ -105,7 +105,7 @@ class Register extends React.Component {
         <Container>
           <Widget
             className="widget-auth mx-auto"
-            title={<h3 className="mt-0">Login to your Web App</h3>}
+            title={<h3 className="mt-0">ADMIN SIGN UP</h3>}
           >
             <p className="widget-auth-info">Please fill all fields below.</p>
             <form onSubmit={this.doRegister}>
@@ -194,21 +194,6 @@ class Register extends React.Component {
                 <Link className="d-block text-center mb-4" to="login">
                   Enter the account
                 </Link>
-                <div className="social-buttons">
-                  <Button color="primary" className="social-button">
-                    <i className="social-icon social-google" />
-                    <p className="social-text">GOOGLE</p>
-                  </Button>
-                  <Button color="success" className="social-button">
-                    <i
-                      className="social-icon social-microsoft"
-                      style={{ backgroundImage: `url(${microsoft})` }}
-                    />
-                    <p className="social-text" style={{ color: '#fff' }}>
-                      MICROSOFT
-                    </p>
-                  </Button>
-                </div>
               </div>
             </form>
           </Widget>
@@ -260,7 +245,7 @@ class Register extends React.Component {
           {/*</Widget>*/}
         </Container>
         <footer className="auth-footer">
-          2020 &copy; Sing App - React Admin Dashboard Template.
+          2020 &copy; DEKUT STUSURVEY
         </footer>
       </div>
     );

@@ -71,8 +71,8 @@ class Sidebar extends React.Component {
                 }}
             >
                 <header className={s.logo}>
-                    <a href="https://demo.flatlogic.com/light-blue-react/">Light <span
-                        className="fw-bold">Blue</span></a>
+                    <a >DeKUT <span
+                        className="fw-bold">StuSurvey</span></a>
                 </header>
                 <ul className={s.nav}>
                     <LinksGroup
@@ -84,25 +84,7 @@ class Sidebar extends React.Component {
                         link="/app/main"
                         index="main"
                     />
-                    <h5 className={[s.navTitle, s.groupTitle].join(' ')}>TEMPLATE</h5>
-                    <LinksGroup
-                        onActiveSidebarItemChange={activeItem => this.props.dispatch(changeActiveSidebarItem(activeItem))}
-                        activeItem={this.props.activeItem}
-                        header="Typography"
-                        isHeader
-                        iconName="flaticon-network"
-                        link="/app/typography"
-                        index="core"
-                    />
-                    <LinksGroup
-                        onActiveSidebarItemChange={t => this.props.dispatch(changeActiveSidebarItem(t))}
-                        activeItem={this.props.activeItem}
-                        header="Tables Basic"
-                        isHeader
-                        iconName="flaticon-map-location"
-                        link="/app/tables"
-                        index="tables"
-                    />
+                    <h5 className={[s.navTitle, s.groupTitle].join(' ')}>MISCALLENEOUS</h5>
                     <LinksGroup
                         onActiveSidebarItemChange={activeItem => this.props.dispatch(changeActiveSidebarItem(activeItem))}
                         activeItem={this.props.activeItem}
@@ -122,13 +104,7 @@ class Sidebar extends React.Component {
                         index="forms"
                         childrenLinks={[
                             {
-                                header: 'Charts', link: '/app/charts',
-                            },
-                            {
-                                header: 'Icons', link: '/app/icons',
-                            },
-                            {
-                                header: 'Maps', link: '/app/maps',
+                                header: 'Map', link: '/app/maps',
                             },
                         ]}
                     />
@@ -162,26 +138,6 @@ class Sidebar extends React.Component {
                     </li>
                 </ul>
                 {/* eslint-enable */}
-                <h5 className={s.navTitle}>
-                    PROJECTS
-                </h5>
-                <div className={s.sidebarAlerts}>
-                    {this.props.alertsList.map(alert => // eslint-disable-line
-                        <Alert
-                            key={alert.id}
-                            className={s.sidebarAlert} color="transparent"
-                            isOpen={true} // eslint-disable-line
-                            toggle={() => {
-                                this.dismissAlert(alert.id);
-                            }}
-                        >
-                            <span>{alert.title}</span><br/>
-                            <Progress className={`bg-custom-dark progress-xs mt-1`} color={alert.color}
-                                      value={alert.value}/>
-                            <small>{alert.footer}</small>
-                        </Alert>,
-                    )}
-                </div>
             </nav>
         );
     }

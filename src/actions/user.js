@@ -57,9 +57,9 @@ export function loginUser(creds) {
           Password: creds.password,
         },
       }).then((res) => {
-        localStorage.setItem('authenticated', true);
         console.log(res.data);
       });
+      localStorage.setItem('authenticated', true);
     } else {
       dispatch(loginError('Something was wrong. Try again'));
     }

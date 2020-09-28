@@ -15,7 +15,7 @@ import {
 } from 'reactstrap';
 import Widget from '../../components/Widget';
 import { loginUser } from '../../actions/user';
-import microsoft from '../../images/microsoft.png';
+
 
 class Login extends React.Component {
   static propTypes = {
@@ -76,7 +76,7 @@ class Login extends React.Component {
         <Container>
           <Widget
             className="widget-auth mx-auto"
-            title={<h3 className="mt-0">Login to your Web App</h3>}
+            title={<h3 className="mt-0">ADMIN LOGIN</h3>}
           >
             <p className="widget-auth-info">Use your email to sign in.</p>
             <form onSubmit={this.doLogin}>
@@ -126,7 +126,7 @@ class Login extends React.Component {
                     name="password"
                     placeholder="Password"
                   />
-                </InputGroup>
+                </InputGroup> 
               </FormGroup>
               <div className="bg-widget auth-widget-footer">
                 <Button
@@ -147,27 +147,12 @@ class Login extends React.Component {
                 <Link className="d-block text-center mb-4" to="register">
                   Create an Account
                 </Link>
-                <div className="social-buttons">
-                  <Button color="primary" className="social-button">
-                    <i className="social-icon social-google" />
-                    <p className="social-text">GOOGLE</p>
-                  </Button>
-                  <Button color="success" className="social-button">
-                    <i
-                      className="social-icon social-microsoft"
-                      style={{ backgroundImage: `url(${microsoft})` }}
-                    />
-                    <p className="social-text" style={{ color: '#fff' }}>
-                      MICROSOFT
-                    </p>
-                  </Button>
-                </div>
               </div>
             </form>
           </Widget>
         </Container>
         <footer className="auth-footer">
-          2020 &copy; Light Blue Template - React Admin Dashboard Template.
+          2020 &copy; DEKUT STUSURVEY
         </footer>
       </div>
     );

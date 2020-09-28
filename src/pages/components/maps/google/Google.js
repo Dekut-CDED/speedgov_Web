@@ -9,12 +9,32 @@ import Widget from '../../../../components/Widget';
 
 import s from './Google.module.scss';
 
+const BASEURL = 'https://dkutwebapp.azurewebsites.net/api';
+
+const axios = require("axios");
+
+async function getCatFacts() {
+	const response = await axios ({
+	url: BASEURL + "/coordinates/",
+	method: "GET"
+})
+
+console.log(response.data)
+}
+
+getCatFacts()
+
+
+
 const BasicMap = withScriptjs(withGoogleMap(() =>
   <GoogleMap
-    defaultZoom={12}
-    defaultCenter={{ lat: parseFloat(-37.813179), lng: parseFloat(144.950259) }}
+    defaultZoom={14}
+    defaultCenter={{ lat: parseFloat(-0.3977027), lng: parseFloat(36.9612051) }}
   >
-    <Marker position={{ lat: -37.813179, lng: 144.950259 }} />
+    <Marker position={{ lat: -0.3977027, lng: 36.9612051 }} />
+    <Marker position={{ lat: -0.3993217, lng: 36.9813000 }} />
+    <Marker position={{ lat: -0.3979011, lng: 36.971400 }} />
+    <Marker position={{ lat: -0.3978000, lng: 36.951500 }} />
   </GoogleMap>,
 ));
 
@@ -24,10 +44,10 @@ class Maps extends React.Component {
     return (
       <div>
         <h1 className="page-title">
-          Google <span className="fw-semi-bold">Maps</span>
+           <span className="fw-semi-bold"> DEKUT MAP</span>
         </h1>
         <Widget
-          title={<h4>Google Maps <small className="text-muted">Default and customized</small></h4>}
+          title={<h4>VIOLATORS LOCATION </h4>}
           collapse close
         >
           <div className={s.MapContainer}>

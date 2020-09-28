@@ -128,7 +128,7 @@ class Header extends React.Component {
     return (
       <Navbar className={`d-print-none ${s.root}`}>
         <UncontrolledAlert className={`${s.alert} mr-3 d-lg-down-none animate__animated animate__bounceIn animate__delay-1s`}>
-          <i className="fa fa-info-circle mr-1" /> Check out Light Blue <button className="btn-link" onClick={() => this.setState({ settingsOpen: true })}>settings</button> on
+          <i className="fa fa-info-circle mr-1" /> Check out the tab <button className="btn-link" onClick={() => this.setState({ settingsOpen: true })}>settings</button> on
           the right!
         </UncontrolledAlert>
         <Collapse className={`${s.searchCollapse} ml-lg-0 mr-md-3`} isOpen={this.state.searchOpen}>
@@ -158,12 +158,9 @@ class Header extends React.Component {
               <span className={`${s.avatar} rounded-circle thumb-sm float-left mr-2`}>
                 <img src={avatar} alt="..."/>
               </span>
-              <span className={`small ${s.accountCheck}`}>Philip smith</span>
+              <span className={`small ${s.accountCheck}`}>Admin</span>
               <Badge className={s.badge} color="primary">13</Badge>
             </DropdownToggle>
-            <DropdownMenu right className={`${s.notificationsWrapper} py-0 animate__animated animate__faster animate__fadeInUp`}>
-              <Notifications />
-            </DropdownMenu>
           </Dropdown>
           <NavItem className="d-lg-none d-md-block d-sm-none">
             <NavLink onClick={this.toggleSearchOpen} className={s.navItem} href="#">
@@ -174,41 +171,6 @@ class Header extends React.Component {
             <DropdownToggle nav className={`${s.navItem} text-white`}>
               <i className="glyphicon glyphicon-comments" />
             </DropdownToggle>
-            <DropdownMenu className={`${s.dropdownMenu} ${s.messages}`}>
-              <DropdownItem>
-                <img className={s.image} src={sender1} alt="" />
-                <div className={s.details}>
-                  <div>Jane Hew</div>
-                  <div className={s.text}>
-                    Hey, John! How is it going? ...
-                  </div>
-                </div>
-              </DropdownItem>
-              <DropdownItem>
-                <img className={s.image} src={sender2} alt="" />
-                <div className={s.details}>
-                  <div>Alies Rumiancaŭ</div>
-                  <div className={s.text}>
-                    I will definitely buy this template
-                  </div>
-                </div>
-              </DropdownItem>
-              <DropdownItem>
-                <img className={s.image} src={sender3} alt="" />
-                <div className={s.details}>
-                  <div>Michał Rumiancaŭ</div>
-                  <div className={s.text}>
-                    Is it really Lore ipsum? Lore ...
-                  </div>
-                </div>
-              </DropdownItem>
-              <DropdownItem>
-                {/* eslint-disable-next-line */}
-                <a href="#" className="text-white">
-                  See all messages <i className="fa fa-arrow-right" />
-                </a>
-              </DropdownItem>
-            </DropdownMenu>
           </Dropdown>
           <NavItem className={`${s.divider} text-white`} />
           <Dropdown nav isOpen={this.state.settingsOpen} toggle={this.toggleSettingsDropdown}>
@@ -226,50 +188,6 @@ class Header extends React.Component {
                 <Button color="primary" onClick={() => this.toggleVisibilitySidebar('show')} className={this.props.sidebarVisibility === 'show' ? 'active' : ''}>Show</Button>
                 <Button color="primary" onClick={() => this.toggleVisibilitySidebar('hide')} className={this.props.sidebarVisibility === 'hide' ? 'active' : ''}>Hide</Button>
               </ButtonGroup>
-            </DropdownMenu>
-          </Dropdown>
-          <Dropdown nav isOpen={this.state.supportOpen} toggle={this.toggleSupportDropdown}>
-            <DropdownToggle nav className={`${s.navItem} text-white`}>
-              <i className="glyphicon glyphicon-globe" />
-              <span className={s.count}>8</span>
-            </DropdownToggle>
-            <DropdownMenu right className={`${s.dropdownMenu} ${s.support}`}>
-              <DropdownItem>
-                <Badge color="danger"><i className="fa fa-bell-o" /></Badge>
-                <div className={s.details}>
-                  Check out this awesome ticket
-                </div>
-              </DropdownItem>
-              <DropdownItem>
-                <Badge color="warning"><i className="fa fa-question-circle" /></Badge>
-                <div className={s.details}>
-                  What is the best way to get ...
-                </div>
-              </DropdownItem>
-              <DropdownItem>
-                <Badge color="success"><i className="fa fa-info-circle" /></Badge>
-                <div className={s.details}>
-                  This is just a simple notification
-                </div>
-              </DropdownItem>
-              <DropdownItem>
-                <Badge color="info"><i className="fa fa-plus" /></Badge>
-                <div className={s.details}>
-                  12 new orders has arrived today
-                </div>
-              </DropdownItem>
-              <DropdownItem>
-                <Badge color="danger"><i className="fa fa-tag" /></Badge>
-                <div className={s.details}>
-                  One more thing that just happened
-                </div>
-              </DropdownItem>
-              <DropdownItem>
-               {/* eslint-disable-next-line */}
-               <a href="#" className="text-white">
-                  See all tickets <i className="fa fa-arrow-right" />
-                </a>
-              </DropdownItem>
             </DropdownMenu>
           </Dropdown>
           <NavItem>
