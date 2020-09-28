@@ -40,9 +40,9 @@ const BasicMap = withScriptjs(withGoogleMap(() =>
     getCatFacts()
     axios();
     <Marker position={{ lat: -0.3977027, lng: 36.9612051 }} />
+    {/*<Marker position={{ lat: parseFloat(response.data.lat), lng: parseFloat(response.data.lng) }} />
     <Marker position={{ lat: parseFloat(response.data.lat), lng: parseFloat(response.data.lng) }} />
-    <Marker position={{ lat: parseFloat(response.data.lat), lng: parseFloat(response.data.lng) }} />
-    <Marker position={{ lat: parseFloat(response.data.lat), lng: parseFloat(response.data.lng) }} />
+    <Marker position={{ lat: parseFloat(response.data.lat), lng: parseFloat(response.data.lng) }} />*/}
     <Marker position={{ lat: -0.3978000, lng: 36.951500 }} />
   </GoogleMap>,
 ));
