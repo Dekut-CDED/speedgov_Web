@@ -1,4 +1,4 @@
-import React from 'react';
+import React , {Fragment} from 'react';
 import { connect } from 'react-redux';
 import { Switch, Route, Redirect } from 'react-router';
 import { HashRouter } from 'react-router-dom';
@@ -13,6 +13,8 @@ import LayoutComponent from '../components/Layout';
 import Login from '../pages/login';
 import Register from '../pages/register';
 import { logoutUser } from '../actions/user';
+
+
 
 const PrivateRoute = ({dispatch, component, ...rest }) => {
     if (!Login.isAuthenticated(JSON.parse(localStorage.getItem('authenticated')))) {
@@ -30,6 +32,7 @@ const CloseButton = ({closeToast}) => <i onClick={closeToast} className="la la-c
 class App extends React.PureComponent {
   render() {
     return (
+
         <div>
             <ToastContainer
                 autoClose={5000}
@@ -49,7 +52,6 @@ class App extends React.PureComponent {
                 </Switch>
             </HashRouter>
         </div>
-
     );
   }
 }

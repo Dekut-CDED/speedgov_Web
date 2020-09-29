@@ -1,5 +1,5 @@
 import { toast } from 'react-toastify';
-import { axios } from 'axios';
+import  axios  from 'axios';
 
 export const REGISTER_REQUEST = 'REGISTER_REQUEST';
 export const REGISTER_SUCCESS = 'REGISTER_SUCCESS';
@@ -19,13 +19,31 @@ export function registerError(payload) {
   };
 }
 
-export function registerUser(payload) {
-  return (dispatch) => {
-    if (payload.creds.email.length > 0 && payload.creds.password.length > 0) {
-      toast.success("You've been registered successfully");
-      payload.history.push('/app');
-    } else {
-      dispatch(registerError('Something was wrong. Try again'));
-    }
+export const  registerUser = (payload) => async (dispatch) => {
+
+  const body = JSON.stringify({ Email: payload.creds.Email, Password:  payload.creds.Password});
+  console.log(body);
+  const config = {
+    headers: {
+      'Content-Type': 'application/json',
+    },
   };
+  try {
+    const res = await axios.post(
+      'http://localhost:5000/api/v1/auth/admins/',
+      body,
+      config
+    );
+   console.log(res)
+   toast.success(" You've been registered successfully");
+   dispatch({ type: REGISTER_SUCCESS, payload: res.data.token });
+   localStorage.setItem('authenticated','true');
+   payload.history.push('/login');
+  } catch (error) {
+    console.log(error);
+    dispatch({ type: REGISTER_FAILURE });
+   toast.success("You Registration not Successful");
+  }
 }
+
+
