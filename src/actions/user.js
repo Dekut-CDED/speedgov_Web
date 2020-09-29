@@ -1,11 +1,11 @@
 import axios from 'axios';
+import { toast } from 'react-toastify';
+import { BASEURL } from '../utils/constants'
 
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_FAILURE = 'LOGIN_FAILURE';
 export const LOGOUT_REQUEST = 'LOGOUT_REQUEST';
 export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
-
-const BASEURL = 'https://dkutwebapp.azurewebsites.net/api';
 
 export function receiveLogin() {
   return {
@@ -42,26 +42,23 @@ export function logoutUser() {
   };
 }
 
-export function loginUser(creds) {
-  return (dispatch) => {
-    dispatch(receiveLogin());
+export const loginUser= (creds) => async(dispach) => {
+    const body = JSON.stringify({Email: creds.email, Password: creds.password})
 
-    if (creds.email.length > 0 && creds.password.length > 0) {
-      let data;
+      console.log(body)
+      const config = {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
+    try {
+      const res = await axios.post(`${BASEURL}v1/auth/admins/login`, body, config)
+      console.log(res)
+      toast.success("You've been Loged In Successfully")
+      localStorage.setItem('authenticated','true');
+      dispach(receiveLogin())
+    } catch (error) {
 
-      axios({
-        method: 'post',
-        url: BASEURL + '/v1/auth/login/',
-        data: {
-          Email: creds.email,
-          Password: creds.password,
-        },
-      }).then((res) => {
-        console.log(res.data);
-      });
-      localStorage.setItem('authenticated', true);
-    } else {
-      dispatch(loginError('Something was wrong. Try again'));
+      toast.success(error)
     }
-  };
 }

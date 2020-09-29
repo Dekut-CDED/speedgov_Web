@@ -31,7 +31,7 @@ class Login extends React.Component {
 
     this.state = {
       email: '',
-      password: 'password',
+      password: '',
     };
 
     this.doLogin = this.doLogin.bind(this);
