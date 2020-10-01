@@ -1,6 +1,8 @@
 import axios from 'axios';
 import { toast } from 'react-toastify';
-import { BASEURL } from '../utils/constants'
+import { BASEURL } from '../utils/constants';
+import { GetUsers } from '../actions/Users';
+import { GetRequest } from '../actions/Request';
 
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_FAILURE = 'LOGIN_FAILURE';
@@ -42,23 +44,29 @@ export function logoutUser() {
   };
 }
 
-export const loginUser= (creds) => async(dispach) => {
-    const body = JSON.stringify({Email: creds.email, Password: creds.password})
+export const loginUser = (creds) => async (dispatch) => {
+  const body = JSON.stringify({ Email: creds.email, Password: creds.password });
 
-      console.log(body)
-      const config = {
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    };
-    try {
-      const res = await axios.post(`${BASEURL}v1/auth/admins/login`, body, config)
-      console.log(res)
-      toast.success("You've been Loged In Successfully")
-      localStorage.setItem('authenticated','true');
-      dispach(receiveLogin())
-    } catch (error) {
-
-      toast.success(error)
-    }
-}
+  console.log(body);
+  const config = {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  };
+  try {
+    const res = await axios.post(
+      `${BASEURL}v1/auth/admins/login`,
+      body,
+      config
+    );
+    console.log(res);
+    toast.success("You've been Loged In Successfully");
+    localStorage.setItem('token', res.data.token);
+    localStorage.setItem('authenticated', 'true');
+    dispatch(receiveLogin());
+    dispatch(GetUsers());
+    dispatch(GetRequest());
+  } catch (error) {
+    toast.success(error);
+  }
+};
