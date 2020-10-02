@@ -25,13 +25,17 @@ import {
 } from 'reactstrap';
 import Notifications from '../Notifications';
 import { logoutUser } from '../../actions/user';
-import { openSidebar, closeSidebar, changeSidebarPosition, changeSidebarVisibility } from '../../actions/navigation';
-
+import {
+  openSidebar,
+  closeSidebar,
+  changeSidebarPosition,
+  changeSidebarVisibility,
+} from '../../actions/navigation';
 
 import avatar from '../../images/people/a5.jpg';
 
 import s from './Header.module.scss';
-import 'animate.css'
+import 'animate.css';
 
 class Header extends React.Component {
   static propTypes = {
@@ -58,7 +62,7 @@ class Header extends React.Component {
       settingsOpen: false,
       searchFocused: false,
       searchOpen: false,
-      notificationsOpen: false
+      notificationsOpen: false,
     };
   }
 
@@ -66,15 +70,14 @@ class Header extends React.Component {
     this.setState({
       notificationsOpen: !this.state.notificationsOpen,
     });
-  }
+  };
 
   onDismiss() {
     this.setState({ visible: false });
   }
 
   doLogout() {
-    this.props
-      .dispatch(logoutUser());
+    this.props.dispatch(logoutUser());
   }
 
   toggleMessagesDropdown() {
@@ -110,7 +113,7 @@ class Header extends React.Component {
   toggleSidebar() {
     this.props.isSidebarOpened
       ? this.props.dispatch(closeSidebar())
-      : this.props.dispatch(openSidebar())
+      : this.props.dispatch(openSidebar());
   }
 
   moveSidebar(position) {
@@ -124,15 +127,24 @@ class Header extends React.Component {
   render() {
     return (
       <Navbar className={`d-print-none ${s.root}`}>
-        <UncontrolledAlert className={`${s.alert} mr-3 d-lg-down-none animate__animated animate__bounceIn animate__delay-1s`}>
-          <i className="fa fa-info-circle mr-1" /> Check out the tab <button className="btn-link" onClick={() => this.setState({ settingsOpen: true })}>settings</button> on
-          the right!
-        </UncontrolledAlert>
-        <Collapse className={`${s.searchCollapse} ml-lg-0 mr-md-3`} isOpen={this.state.searchOpen}>
-          <InputGroup className={`${s.navbarForm} ${this.state.searchFocused ? s.navbarFormFocused : ''}`}>
-            <InputGroupAddon addonType="prepend" className={s.inputAddon}><InputGroupText><i className="fa fa-search" /></InputGroupText></InputGroupAddon>
+        <Collapse
+          className={`${s.searchCollapse} ml-lg-0 mr-md-3`}
+          isOpen={this.state.searchOpen}
+        >
+          <InputGroup
+            className={`${s.navbarForm} ${
+              this.state.searchFocused ? s.navbarFormFocused : ''
+            }`}
+          >
+            <InputGroupAddon addonType="prepend" className={s.inputAddon}>
+              <InputGroupText>
+                <i className="fa fa-search" />
+              </InputGroupText>
+            </InputGroupAddon>
             <Input
-              id="search-input-2" placeholder="Search..." className="input-transparent"
+              id="search-input-2"
+              placeholder="Search..."
+              className="input-transparent"
               onFocus={() => this.setState({ searchFocused: true })}
               onBlur={() => this.setState({ searchFocused: false })}
             />
@@ -142,58 +154,127 @@ class Header extends React.Component {
           <FormGroup>
             <InputGroup className="input-group-no-border">
               <InputGroupAddon addonType="prepend">
-                <InputGroupText><i className="fa fa-search text-white" /></InputGroupText>
+                <InputGroupText>
+                  <i className="fa fa-search text-white" />
+                </InputGroupText>
               </InputGroupAddon>
-              <Input id="search-input" className="input-transparent" placeholder="Search" />
+              <Input
+                id="search-input"
+                className="input-transparent"
+                placeholder="Search"
+              />
             </InputGroup>
           </FormGroup>
         </Form>
 
         <Nav className="ml-md-0 d-flex nav-responsive">
-          <Dropdown nav isOpen={this.state.notificationsOpen} toggle={this.toggleNotifications} id="basic-nav-dropdown" className={`${s.notificationsMenu}`} style={{marginRight: 'auto'}}>
-            <DropdownToggle nav caret style={{color: "#f4f4f5", padding: 0}}>
-              <span className={`${s.avatar} rounded-circle thumb-sm float-left mr-2`}>
-                <img src={avatar} alt="..."/>
+          <Dropdown
+            nav
+            isOpen={this.state.notificationsOpen}
+            toggle={this.toggleNotifications}
+            id="basic-nav-dropdown"
+            className={`${s.notificationsMenu}`}
+            style={{ marginRight: 'auto' }}
+          >
+            <DropdownToggle nav caret style={{ color: '#f4f4f5', padding: 0 }}>
+              <span
+                className={`${s.avatar} rounded-circle thumb-sm float-left mr-2`}
+              >
+                <img src={avatar} alt="..." />
               </span>
               <span className={`small ${s.accountCheck}`}>Admin</span>
-              <Badge className={s.badge} color="primary">13</Badge>
+              <Badge className={s.badge} color="primary">
+                13
+              </Badge>
             </DropdownToggle>
           </Dropdown>
           <NavItem className="d-lg-none d-md-block d-sm-none">
-            <NavLink onClick={this.toggleSearchOpen} className={s.navItem} href="#">
+            <NavLink
+              onClick={this.toggleSearchOpen}
+              className={s.navItem}
+              href="#"
+            >
               <i className="glyphicon glyphicon-search text-white" />
             </NavLink>
           </NavItem>
-          <Dropdown nav isOpen={this.state.messagesOpen} toggle={this.toggleMessagesDropdown}>
+          <Dropdown
+            nav
+            isOpen={this.state.messagesOpen}
+            toggle={this.toggleMessagesDropdown}
+          >
             <DropdownToggle nav className={`${s.navItem} text-white`}>
               <i className="glyphicon glyphicon-comments" />
             </DropdownToggle>
           </Dropdown>
           <NavItem className={`${s.divider} text-white`} />
-          <Dropdown nav isOpen={this.state.settingsOpen} toggle={this.toggleSettingsDropdown}>
+          <Dropdown
+            nav
+            isOpen={this.state.settingsOpen}
+            toggle={this.toggleSettingsDropdown}
+          >
             <DropdownToggle nav className={`${s.navItem} text-white`}>
               <i className="glyphicon glyphicon-cog" />
             </DropdownToggle>
             <DropdownMenu className={`${s.dropdownMenu} ${s.settings}`}>
               <h6>Sidebar on the</h6>
               <ButtonGroup size="sm">
-                <Button color="primary" onClick={() => this.moveSidebar('left')} className={this.props.sidebarPosition === 'left' ? 'active' : ''}>Left</Button>
-                <Button color="primary" onClick={() => this.moveSidebar('right')} className={this.props.sidebarPosition === 'right' ? 'active' : ''}>Right</Button>
+                <Button
+                  color="primary"
+                  onClick={() => this.moveSidebar('left')}
+                  className={
+                    this.props.sidebarPosition === 'left' ? 'active' : ''
+                  }
+                >
+                  Left
+                </Button>
+                <Button
+                  color="primary"
+                  onClick={() => this.moveSidebar('right')}
+                  className={
+                    this.props.sidebarPosition === 'right' ? 'active' : ''
+                  }
+                >
+                  Right
+                </Button>
               </ButtonGroup>
               <h6 className="mt-2">Sidebar</h6>
               <ButtonGroup size="sm">
-                <Button color="primary" onClick={() => this.toggleVisibilitySidebar('show')} className={this.props.sidebarVisibility === 'show' ? 'active' : ''}>Show</Button>
-                <Button color="primary" onClick={() => this.toggleVisibilitySidebar('hide')} className={this.props.sidebarVisibility === 'hide' ? 'active' : ''}>Hide</Button>
+                <Button
+                  color="primary"
+                  onClick={() => this.toggleVisibilitySidebar('show')}
+                  className={
+                    this.props.sidebarVisibility === 'show' ? 'active' : ''
+                  }
+                >
+                  Show
+                </Button>
+                <Button
+                  color="primary"
+                  onClick={() => this.toggleVisibilitySidebar('hide')}
+                  className={
+                    this.props.sidebarVisibility === 'hide' ? 'active' : ''
+                  }
+                >
+                  Hide
+                </Button>
               </ButtonGroup>
             </DropdownMenu>
           </Dropdown>
           <NavItem>
-            <NavLink onClick={this.doLogout} className={`${s.navItem} text-white`} href="#">
+            <NavLink
+              onClick={this.doLogout}
+              className={`${s.navItem} text-white`}
+              href="#"
+            >
               <i className="glyphicon glyphicon-off" />
             </NavLink>
           </NavItem>
           <NavItem className="d-md-none">
-            <NavLink onClick={this.toggleSidebar} className={`${s.navItem} text-white`} href="#">
+            <NavLink
+              onClick={this.toggleSidebar}
+              className={`${s.navItem} text-white`}
+              href="#"
+            >
               <i className="fa fa-bars" />
             </NavLink>
           </NavItem>
@@ -212,4 +293,3 @@ function mapStateToProps(store) {
 }
 
 export default withRouter(connect(mapStateToProps)(Header));
-

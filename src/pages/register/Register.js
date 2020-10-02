@@ -15,7 +15,6 @@ import {
 } from 'reactstrap';
 import Widget from '../../components/Widget';
 import { registerUser, registerError } from '../../actions/register';
-import microsoft from '../../images/microsoft.png';
 import Login from '../login';
 
 class Register extends React.Component {
@@ -27,9 +26,9 @@ class Register extends React.Component {
     super(props);
 
     this.state = {
-      email: 'edwin@tess.com',
-      password: '123',
-      confirmPassword: '123',
+      email: '',
+      password: '',
+      confirmPassword: '',
     };
 
     this.doRegister = this.doRegister.bind(this);
@@ -78,7 +77,7 @@ class Register extends React.Component {
     } else {
       this.props.dispatch(
         registerUser({
-          creds:{
+          creds: {
             Email: this.state.email,
             Password: this.state.password,
           },
@@ -198,9 +197,7 @@ class Register extends React.Component {
             </form>
           </Widget>
         </Container>
-        <footer className="auth-footer">
-          2020 &copy; DEKUT STUSURVEY
-        </footer>
+        <footer className="auth-footer">2020 &copy; DEKUT STUSURVEY</footer>
       </div>
     );
   }

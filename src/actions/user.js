@@ -3,11 +3,36 @@ import { toast } from 'react-toastify';
 import { BASEURL } from '../utils/constants';
 import { GetUsers } from '../actions/Users';
 import { GetRequest } from '../actions/Request';
+import setAuthToken from '../utils/setAuthToken';
 
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_FAILURE = 'LOGIN_FAILURE';
 export const LOGOUT_REQUEST = 'LOGOUT_REQUEST';
 export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
+export const LOAD_SUCCESS = 'LOAD_SUCCESS';
+export const LOAD_FAILED = 'LOAD_FAILED';
+
+export const LoadUser = () => async (dispatch) => {
+  if (localStorage.token) {
+    setAuthToken(localStorage.token);
+  }
+
+  const config = {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  };
+  try {
+    const res = await axios.get(`${BASEURL}v1/auth/me/`, config);
+    dispatch({
+      type: LOAD_SUCCESS,
+      payload: { requests: res.data.data },
+    });
+  } catch (error) {
+    console.log(error);
+    dispatch({ type: LOAD_FAILED, payload: { errors: error } });
+  }
+};
 
 export function receiveLogin() {
   return {
