@@ -1,4 +1,4 @@
-import { GETUSER_SUCCESS, GETUSER_FAILURE } from '../actions/Users';
+import { GETUSER_SUCCESS, GETUSER_FAILURE } from '../actions/types';
 
 const initialState = {
   users: null,
@@ -23,4 +23,3 @@ export default function (state = initialState, action) {
       return state;
   }
 }
-

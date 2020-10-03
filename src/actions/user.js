@@ -1,17 +1,18 @@
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import { BASEURL } from '../utils/constants';
-import { GetUsers } from '../actions/Users';
-import { GetRequest } from '../actions/Request';
 import setAuthToken from '../utils/setAuthToken';
-
-export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
-export const LOGIN_FAILURE = 'LOGIN_FAILURE';
-export const LOGOUT_REQUEST = 'LOGOUT_REQUEST';
-export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
-export const LOAD_SUCCESS = 'LOAD_SUCCESS';
-export const LOAD_FAILED = 'LOAD_FAILED';
-
+import {
+  LOAD_SUCCESS,
+  LOAD_FAILED,
+  LOGIN_FAILURE,
+  LOGIN_SUCCESS,
+  LOGOUT_SUCCESS,
+  REGISTER_FAILURE,
+  CLEAR_REQUESTS,
+  REGISTER_SUCCESS,
+} from './types';
+import { GetRequest } from './Request';
 export const LoadUser = () => async (dispatch) => {
   if (localStorage.token) {
     setAuthToken(localStorage.token);
@@ -23,10 +24,10 @@ export const LoadUser = () => async (dispatch) => {
     },
   };
   try {
-    const res = await axios.get(`${BASEURL}v1/auth/me/`, config);
+    const res = await axios.get(`${BASEURL}v1/auth/admins/me`, config);
     dispatch({
       type: LOAD_SUCCESS,
-      payload: { requests: res.data.data },
+      payload: res.data.data,
     });
   } catch (error) {
     console.log(error);
@@ -47,12 +48,6 @@ function loginError(payload) {
   };
 }
 
-function requestLogout() {
-  return {
-    type: LOGOUT_REQUEST,
-  };
-}
-
 export function receiveLogout() {
   return {
     type: LOGOUT_SUCCESS,
@@ -62,10 +57,9 @@ export function receiveLogout() {
 // Logs the user out
 export function logoutUser() {
   return (dispatch) => {
-    dispatch(requestLogout());
     localStorage.removeItem('authenticated');
-    localStorage.removeItem('token');
-    dispatch(receiveLogout());
+    dispatch({ type: LOGOUT_SUCCESS });
+    dispatch({ type: CLEAR_REQUESTS });
   };
 }
 
@@ -86,12 +80,46 @@ export const loginUser = (creds) => async (dispatch) => {
     );
     console.log(res);
     toast.success("You've been Loged In Successfully");
-    localStorage.setItem('token', res.data.token);
     localStorage.setItem('authenticated', 'true');
-    dispatch(receiveLogin());
-    dispatch(GetUsers());
+    dispatch({ type: LOGIN_SUCCESS, payload: { token: res.data.token } });
+    dispatch(LoadUser());
     dispatch(GetRequest());
   } catch (error) {
     toast.success(error);
   }
 };
+
+export const registerUser = (payload) => async (dispatch) => {
+  const body = JSON.stringify({
+    Email: payload.creds.Email,
+    Password: payload.creds.Password,
+  });
+  const config = {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  };
+  try {
+    const res = await axios.post(`${BASEURL}v1/auth/admins/`, body, config);
+    toast.success(" You've been registered successfully");
+    dispatch({ type: REGISTER_SUCCESS, payload: { token: res.data.token } });
+    localStorage.setItem('authenticated', 'true');
+    localStorage.setItem('token', res.data.token);
+
+    dispatch(LoadUser());
+    dispatch(GetRequest());
+    payload.history.push('/login');
+  } catch (error) {
+    console.log(error);
+    dispatch({ type: REGISTER_FAILURE });
+    toast.success('You Registration not Successful');
+  }
+};
+
+export function registerError(erro) {
+  alert('Register Failure');
+  return {
+    type: REGISTER_FAILURE,
+    payload: erro,
+  };
+}

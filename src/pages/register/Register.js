@@ -14,7 +14,7 @@ import {
   Label,
 } from 'reactstrap';
 import Widget from '../../components/Widget';
-import { registerUser, registerError } from '../../actions/register';
+import { registerUser, registerError } from '../../actions/user';
 import Login from '../login';
 
 class Register extends React.Component {
@@ -205,8 +205,8 @@ class Register extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    isFetching: state.register.isFetching,
-    errorMessage: state.register.errorMessage,
+    isFetching: state.auth.isFetching,
+    errorMessage: state.auth.errorMessage,
   };
 }
 

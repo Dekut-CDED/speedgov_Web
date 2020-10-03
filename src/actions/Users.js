@@ -3,8 +3,7 @@ import axios from 'axios';
 import { BASEURL } from '../utils/constants';
 import setAuthToken from '../utils/setAuthToken';
 
-export const GETUSER_SUCCESS = 'REGISTER_SUCCESS';
-export const GETUSER_FAILURE = 'REGISTER_FAILURE';
+import { GETUSER_SUCCESS, GETUSER_FAILURE } from './types';
 
 export const GetUsers = () => async (dispatch) => {
   if (localStorage.token) {

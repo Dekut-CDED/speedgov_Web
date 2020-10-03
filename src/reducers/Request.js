@@ -1,23 +1,36 @@
-import { GETUSER_SUCCESS, GETUSER_FAILURE } from '../actions/Users';
+import {
+  GETREQUEST_SUCCESS,
+  GETREQUEST_FAILURE,
+  CLEAR_REQUESTS,
+} from '../actions/types';
 
 const initialState = {
   requests: null,
   error: null,
+  loading: true,
 };
 
 export default function (state = initialState, action) {
   const { type, payload } = action;
 
   switch (type) {
-    case GETUSER_SUCCESS:
+    case GETREQUEST_SUCCESS:
       return {
         ...state,
-        ...payload,
+        requests: payload,
+        loading: false,
       };
-    case GETUSER_FAILURE:
+    case GETREQUEST_FAILURE:
       return {
         ...state,
-        ...payload,
+        error: payload,
+        loading: true,
+      };
+    case CLEAR_REQUESTS:
+      return {
+        ...state,
+        requests: null,
+        loading: false,
       };
     default:
       return state;

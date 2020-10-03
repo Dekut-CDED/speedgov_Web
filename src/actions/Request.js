@@ -2,9 +2,7 @@ import { toast } from 'react-toastify';
 import axios from 'axios';
 import { BASEURL } from '../utils/constants';
 import setAuthToken from '../utils/setAuthToken';
-
-export const GETREQUEST_SUCCESS = 'REGISTER_SUCCESS';
-export const GETREQUEST_FAILURE = 'REGISTER_FAILURE';
+import { GETREQUEST_FAILURE, GETREQUEST_SUCCESS } from './types.js';
 
 export const GetRequest = () => async (dispatch) => {
   if (localStorage.token) {
@@ -17,13 +15,15 @@ export const GetRequest = () => async (dispatch) => {
     },
   };
   try {
-    const res = await axios.get(`${BASEURL}v1/requests/`, config);
+    const res = await axios.get(
+      `${BASEURL}v1/requests?select=requestName,locationName`,
+      config
+    );
     dispatch({
       type: GETREQUEST_SUCCESS,
-      payload: { requests: res.data.data },
+      payload: res.data.data,
     });
   } catch (error) {
-    console.log(error);
     dispatch({ type: GETREQUEST_FAILURE, payload: { errors: error } });
   }
 };

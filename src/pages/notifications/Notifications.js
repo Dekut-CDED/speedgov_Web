@@ -1,44 +1,27 @@
-import React, { Fragment, useEffect, useState } from 'react';
-import axios from 'axios';
+import React, { Fragment, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { Row, Col, Button } from 'reactstrap';
-import ReactFlexyTable from 'react-flexy-table';
-import 'react-flexy-table/dist/index.css';
 
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import uuid from 'uuid/v4';
-import Widget from '../../components/Widget';
 import { connect } from 'react-redux';
-import MyRequest from './Request';
-import setAuthToken from '../../utils/setAuthToken';
+import Requests from './Request';
+import { GetRequest } from '../../actions/Request';
+import Spinner from './spinner/spinner';
 
-const Notifications = ({ requests }) => {
-  const [data, setData] = useState([]);
-  // Using useEffect to call the API once mounted and set the data
+const Notifications = ({
+  GetRequest,
+  request: { requests },
+  auth: { user, loading },
+}) => {
   useEffect(() => {
-    if (localStorage.token) {
-      setAuthToken(localStorage.token);
-    }
-
+    GetRequest();
     console.log(requests);
-
-    const config = {
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    };
-    (async () => {
-      const result = await axios('https://api.tvmaze.com/search/shows?q=snow');
-
-      setData(result.data);
-    })();
   }, []);
 
-  return (
-    <div>
-      <h2>Hello edwin</h2>
-    </div>
+  return requests === null ? (
+    <Spinner />
+  ) : (
+    <Fragment>
+      <Requests requests={requests} />
+    </Fragment>
   );
 };
 
@@ -47,8 +30,14 @@ Notifications.propTypes = {
   requests: PropTypes.object.isRequired,
 };
 
+Notifications.propTypes = {
+  request: PropTypes.object.isRequired,
+  dispatch: PropTypes.func.isRequired,
+};
+
 const mapStateToProps = (state) => ({
-  requests: state.requests,
+  request: state.request,
+  auth: state.auth,
 });
 
-export default connect(mapStateToProps)(Notifications);
+export default connect(mapStateToProps, { GetRequest })(Notifications);

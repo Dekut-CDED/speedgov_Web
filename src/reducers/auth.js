@@ -4,37 +4,56 @@ import {
   LOGOUT_SUCCESS,
   LOAD_SUCCESS,
   LOAD_FAILED,
-} from '../actions/user';
+  REGISTER_FAILURE,
+  REGISTER_SUCCESS,
+} from '../actions/types';
 
 const authenticated = localStorage.getItem('authenticated');
-export default function auth(
-  state = {
-    isFetching: false,
-    isAuthenticated: authenticated,
-    user: {},
-  },
-  action
-) {
-  switch (action.type) {
+
+const initialState = {
+  token: localStorage.getItem('token'),
+  isAuthenticated: authenticated,
+  loading: true,
+  isFetching: false,
+  user: null,
+};
+
+export default function (state = initialState, action) {
+  const { type, payload } = action;
+  switch (type) {
     case LOAD_SUCCESS:
-    case LOGIN_SUCCESS:
-      return Object.assign({}, state, {
-        isFetching: false,
-        ...action.payload,
+      return {
+        ...state,
         isAuthenticated: true,
-        errorMessage: '',
-      });
-    case LOAD_FAILED:
-    case LOGIN_FAILURE:
-      return Object.assign({}, state, {
+        loading: false,
+        user: payload,
         isFetching: false,
-        isAuthenticated: false,
-        errorMessage: action.payload,
-      });
+      };
+    case LOGIN_SUCCESS:
+    case REGISTER_SUCCESS:
+      localStorage.setItem('token', payload.token);
+      return {
+        ...state,
+        ...payload,
+        isAuthenticated: true,
+        loading: false,
+        isFetching: false,
+      };
+    // @ts-ignore
+    case LOGIN_FAILURE:
+    case REGISTER_FAILURE:
     case LOGOUT_SUCCESS:
-      return Object.assign({}, state, {
+    case LOAD_FAILED:
+      localStorage.removeItem('token');
+      localStorage.removeItem('authenticated');
+      return {
+        ...state,
+        token: null,
         isAuthenticated: false,
-      });
+        loading: false,
+        user: null,
+        isFetching: false,
+      };
     default:
       return state;
   }
