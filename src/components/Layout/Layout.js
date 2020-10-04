@@ -18,6 +18,7 @@ import Sidebar from '../Sidebar';
 import BreadcrumbHistory from '../BreadcrumbHistory';
 import { openSidebar, closeSidebar } from '../../actions/navigation';
 import s from './Layout.module.scss';
+import AdminContainer from '../../pages/Admins/AdminContainer';
 
 class Layout extends React.Component {
   static propTypes = {
@@ -35,7 +36,6 @@ class Layout extends React.Component {
 
     this.handleSwipe = this.handleSwipe.bind(this);
   }
-
 
   handleSwipe(e) {
     if ('ontouchstart' in window) {
@@ -77,19 +77,40 @@ class Layout extends React.Component {
                   timeout={200}
                 >
                   <Switch>
-                    <Route path="/app/main" exact render={() => <Redirect to="/app/main/dashboard" />} />
-                    <Route path="/app/main/dashboard" exact component={Dashboard} />
+                    <Route
+                      path="/app/main"
+                      exact
+                      render={() => <Redirect to="/app/main/dashboard" />}
+                    />
+                    <Route
+                      path="/app/main/dashboard"
+                      exact
+                      component={Dashboard}
+                    />
                     <Route path="/app/icons" exact component={UIIcons} />
-                    <Route path="/app/notifications" exact component={UINotifications} />
+                    <Route
+                      path="/app/notifications"
+                      exact
+                      component={UINotifications}
+                    />
                     <Route path="/app/charts" exact component={Charts} />
                     <Route path="/app/tables" exact component={TablesStatic} />
                     <Route path="/app/maps" exact component={MapsGoogle} />
-                    <Route path="/app/typography" exact component={CoreTypography} />
+                    <Route
+                      path="/app/typography"
+                      exact
+                      component={CoreTypography}
+                    />
+                    <Route
+                      path="/app/admins"
+                      exact
+                      component={AdminContainer}
+                    />
                   </Switch>
                 </CSSTransition>
               </TransitionGroup>
               <footer className={s.contentFooter}>
-                DEKUT STUSURVEY <a >@DEKUT</a>
+                DEKUT STUSURVEY <a>@DEKUT</a>
               </footer>
             </main>
           </Hammer>

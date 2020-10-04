@@ -1,4 +1,8 @@
 $(function () {
+  $('#adminTable').DataTable({
+    responsive: true,
+    autoWidth: false,
+  });
   $('#requestTable').DataTable({
     responsive: true,
     autoWidth: false,

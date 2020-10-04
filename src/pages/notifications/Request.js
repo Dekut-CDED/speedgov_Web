@@ -19,11 +19,11 @@ const Request = ({ requests }) => {
       <td>{req.requestName}</td>
       <td>{req.locationName}</td>
       <td>
-        <button className="btn btn-danger"> Decline Permission</button>
+        <button className="btn btn-success"> Approve Request</button>
       </td>
 
       <td>
-        <button className="btn btn-success"> Approve Request</button>
+        <button className="btn btn-danger"> Decline Permission</button>
       </td>
     </tr>
   ));

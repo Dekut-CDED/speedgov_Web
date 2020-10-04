@@ -114,6 +114,18 @@ class Sidebar extends React.Component {
             link="/app/forms"
             index="forms"
           />
+
+          <LinksGroup
+            onActiveSidebarItemChange={(activeItem) =>
+              this.props.dispatch(changeActiveSidebarItem(activeItem))
+            }
+            activeItem={this.props.activeItem}
+            header="Admins"
+            isHeader
+            iconName="flaticon-list"
+            link="/app/admins"
+            index="forms"
+          />
         </ul>
         {/* eslint-enable */}
       </nav>
