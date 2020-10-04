@@ -2,13 +2,17 @@ import { combineReducers } from 'redux';
 import auth from './auth';
 import navigation from './navigation';
 import alerts from './alerts';
-import users from './Users';
+import admins from './Admin';
 import request from './Request';
+import students from './Students';
+import location from './Locations';
 
 export default combineReducers({
   alerts,
   auth,
   navigation,
-  users,
+  admins,
   request,
+  students,
+  location,
 });

@@ -19,7 +19,11 @@ const Request = ({ requests }) => {
       <td>{req.requestName}</td>
       <td>{req.locationName}</td>
       <td>
-        <button className="btn btn-danger"> Delete</button>
+        <button className="btn btn-danger"> Decline Permission</button>
+      </td>
+
+      <td>
+        <button className="btn btn-success"> Approve Request</button>
       </td>
     </tr>
   ));
@@ -57,6 +61,7 @@ const Request = ({ requests }) => {
                     <th>Request Name</th>
                     <th>Location Name</th>
                     <th />
+                    <th />
                   </tr>
                 </thead>
                 <tbody>{studentsRequest}</tbody>
@@ -66,6 +71,7 @@ const Request = ({ requests }) => {
                     <th>Req No.</th>
                     <th>Request Name</th>
                     <th>Location Name</th>
+                    <th />
                     <th />
                   </tr>
                 </tfoot>

@@ -1,7 +1,11 @@
-import { GETUSER_SUCCESS, GETUSER_FAILURE } from '../actions/types';
+import {
+  GETLOCATIONS_SUCCESS,
+  GETLOCATIONS_FAILURE,
+  CLEAR_LOCATIONS,
+} from '../actions/types';
 
 const initialState = {
-  users: null,
+  locations: null,
   error: null,
 };
 
@@ -9,15 +13,19 @@ export default function (state = initialState, action) {
   const { type, payload } = action;
 
   switch (type) {
-    case GETUSER_SUCCESS:
+    case GETLOCATIONS_SUCCESS:
       return {
         ...state,
         ...payload,
       };
-    case GETUSER_FAILURE:
+    case GETLOCATIONS_FAILURE:
       return {
         ...state,
         ...payload,
+      };
+    case CLEAR_LOCATIONS:
+      return {
+        location: null,
       };
     default:
       return state;

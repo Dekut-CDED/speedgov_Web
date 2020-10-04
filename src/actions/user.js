@@ -13,6 +13,9 @@ import {
   REGISTER_SUCCESS,
 } from './types';
 import { GetRequest } from './Request';
+import { GetAllLocationViolation } from './Location';
+import { UpdateAdminLastLogin } from './Admins';
+
 export const LoadUser = () => async (dispatch) => {
   if (localStorage.token) {
     setAuthToken(localStorage.token);
@@ -57,6 +60,7 @@ export function receiveLogout() {
 // Logs the user out
 export function logoutUser() {
   return (dispatch) => {
+    dispatch(UpdateAdminLastLogin());
     localStorage.removeItem('authenticated');
     dispatch({ type: LOGOUT_SUCCESS });
     dispatch({ type: CLEAR_REQUESTS });
@@ -84,6 +88,7 @@ export const loginUser = (creds) => async (dispatch) => {
     dispatch({ type: LOGIN_SUCCESS, payload: { token: res.data.token } });
     dispatch(LoadUser());
     dispatch(GetRequest());
+    dispatch(GetAllLocationViolation());
   } catch (error) {
     toast.success(error);
   }
