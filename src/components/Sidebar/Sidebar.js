@@ -91,7 +91,32 @@ class Sidebar extends React.Component {
             link="/app/main"
             index="main"
           />
+          <h5 className={[s.navTitle, s.groupTitle].join(' ')}>
+            Location Info
+          </h5>
           <h5 className={[s.navTitle, s.groupTitle].join(' ')}>Data Status</h5>
+          <LinksGroup
+            onActiveSidebarItemChange={(activeItem) =>
+              this.props.dispatch(changeActiveSidebarItem(activeItem))
+            }
+            activeItem={this.props.activeItem}
+            header="Admins"
+            isHeader
+            iconName="flaticon-list"
+            link="/app/admins"
+            index="Admins"
+          />
+          <LinksGroup
+            onActiveSidebarItemChange={(activeItem) =>
+              this.props.dispatch(changeActiveSidebarItem(activeItem))
+            }
+            activeItem={this.props.activeItem}
+            header="Registered Students"
+            isHeader
+            iconName="flaticon-list"
+            link="/app/students"
+            index="Students"
+          />
           <LinksGroup
             onActiveSidebarItemChange={(activeItem) =>
               this.props.dispatch(changeActiveSidebarItem(activeItem))
@@ -112,19 +137,7 @@ class Sidebar extends React.Component {
             isHeader
             iconName="flaticon-list"
             link="/app/forms"
-            index="forms"
-          />
-
-          <LinksGroup
-            onActiveSidebarItemChange={(activeItem) =>
-              this.props.dispatch(changeActiveSidebarItem(activeItem))
-            }
-            activeItem={this.props.activeItem}
-            header="Admins"
-            isHeader
-            iconName="flaticon-list"
-            link="/app/admins"
-            index="forms"
+            index="Approves"
           />
         </ul>
         {/* eslint-enable */}

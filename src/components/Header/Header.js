@@ -36,13 +36,16 @@ import avatar from '../../images/people/a5.jpg';
 
 import s from './Header.module.scss';
 import 'animate.css';
-
+import { LoadUser } from '../../actions/user';
 class Header extends React.Component {
   static propTypes = {
     dispatch: PropTypes.func.isRequired,
     sidebarPosition: PropTypes.string.isRequired,
   };
 
+  componentDidMount() {
+    this.props.dispatch(LoadUser());
+  }
   constructor(props) {
     super(props);
 
@@ -125,6 +128,7 @@ class Header extends React.Component {
   }
 
   render() {
+    console.log(this.props.auth);
     return (
       <Navbar className={`d-print-none ${s.root}`}>
         <Collapse
@@ -182,7 +186,7 @@ class Header extends React.Component {
               >
                 <img src={avatar} alt="..." />
               </span>
-              <span className={`small ${s.accountCheck}`}>Admin</span>
+              <span className={`small ${s.accountCheck}`}></span>
               <Badge className={s.badge} color="primary">
                 13
               </Badge>
@@ -286,6 +290,7 @@ class Header extends React.Component {
 
 function mapStateToProps(store) {
   return {
+    auth: store.auth,
     isSidebarOpened: store.navigation.sidebarOpened,
     sidebarVisibility: store.navigation.sidebarVisibility,
     sidebarPosition: store.navigation.sidebarPosition,

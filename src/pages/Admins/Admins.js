@@ -1,6 +1,10 @@
 import React, { useEffect } from 'react';
+import Moment from 'react-moment';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { deleteAdmin } from '../../actions/Admins';
 
-const Request = ({ admin }) => {
+const Admins = ({ deleteAdmin, admin }) => {
   useEffect(() => {
     const script = document.createElement('script');
     script.src = 'js/table.js';
@@ -8,15 +12,29 @@ const Request = ({ admin }) => {
     document.body.appendChild(script);
   }, []);
 
+  const onButtonClick = (elementid) => {
+    deleteAdmin(elementid);
+  };
   const admins = admin.map((admin) => (
     <tr key={admin._id}>
       <td>{admin.email}</td>
       <td>{admin.role}</td>
-      <td>{admin.createdon}</td>
-      <td>{admin.status}</td>
-      <td>{admin.lastlogin}</td>
       <td>
-        <button className="btn btn-danger" color="danger">
+        <Moment>{admin.createdon}</Moment>
+      </td>
+      <td>{admin.status}</td>
+      <td>
+        <Moment fromNow ago>
+          {admin.lastlogin}
+        </Moment>{' '}
+        ago
+      </td>
+      <td>
+        <button
+          className="btn btn-danger"
+          color="danger"
+          onClick={(e) => onButtonClick(admin._id)}
+        >
           Delete Admin
         </button>
       </td>
@@ -72,4 +90,8 @@ const Request = ({ admin }) => {
   );
 };
 
-export default Request;
+Admins.propTypes = {
+  deleteAdmin: PropTypes.func.isRequired,
+};
+
+export default connect(null, { deleteAdmin })(Admins);

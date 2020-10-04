@@ -2,6 +2,8 @@ import {
   GETREQUEST_SUCCESS,
   GETREQUEST_FAILURE,
   CLEAR_REQUESTS,
+  APPROVEREQUEST_SUCCESS,
+  APPROVEREQUEST_FAILURE,
 } from '../actions/types';
 
 const initialState = {
@@ -31,6 +33,11 @@ export default function (state = initialState, action) {
         ...state,
         requests: null,
         loading: false,
+      };
+    case APPROVEREQUEST_FAILURE:
+    case APPROVEREQUEST_SUCCESS:
+      return {
+        ...state,
       };
     default:
       return state;

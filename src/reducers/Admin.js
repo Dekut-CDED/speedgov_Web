@@ -3,6 +3,8 @@ import {
   GETADMIN_FAILURE,
   LASTLOGIN_SUCCESS,
   LASTLOGIN_FAILURE,
+  DELETE_ADMIN_FAILURE,
+  DELETE_ADMIN_SUCCESS,
 } from '../actions/types';
 
 const initialState = {
@@ -26,6 +28,10 @@ export default function (state = initialState, action) {
         ...payload,
       };
     case LASTLOGIN_SUCCESS:
+      return {
+        ...state,
+      };
+    case DELETE_ADMIN_SUCCESS:
       return {
         ...state,
       };

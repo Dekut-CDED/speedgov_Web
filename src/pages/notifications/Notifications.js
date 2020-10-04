@@ -3,13 +3,12 @@ import PropTypes from 'prop-types';
 
 import { connect } from 'react-redux';
 import Requests from './Request';
-import { GetRequest } from '../../actions/Request';
+import { GetAnauthorizedRequests } from '../../actions/Request';
 import Spinner from '../spinner/spinner';
 
-const Notifications = ({ GetRequest, request: { requests } }) => {
+const Notifications = ({ GetAnauthorizedRequests, request: { requests } }) => {
   useEffect(() => {
-    GetRequest();
-    console.log(requests);
+    GetAnauthorizedRequests();
   }, []);
 
   return requests === null ? (
@@ -22,7 +21,7 @@ const Notifications = ({ GetRequest, request: { requests } }) => {
 };
 
 Notifications.propTypes = {
-  GetRequest: PropTypes.func.isRequired,
+  GetAnauthorizedRequests: PropTypes.func.isRequired,
   requests: PropTypes.object.isRequired,
 };
 
@@ -35,4 +34,6 @@ const mapStateToProps = (state) => ({
   request: state.request,
 });
 
-export default connect(mapStateToProps, { GetRequest })(Notifications);
+export default connect(mapStateToProps, { GetAnauthorizedRequests })(
+  Notifications
+);

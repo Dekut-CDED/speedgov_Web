@@ -12,7 +12,7 @@ import {
   CLEAR_REQUESTS,
   REGISTER_SUCCESS,
 } from './types';
-import { GetRequest } from './Request';
+import { GetAnauthorizedRequests } from './Request';
 import { GetAllLocationViolation } from './Location';
 import { UpdateAdminLastLogin } from './Admins';
 
@@ -87,8 +87,6 @@ export const loginUser = (creds) => async (dispatch) => {
     localStorage.setItem('authenticated', 'true');
     dispatch({ type: LOGIN_SUCCESS, payload: { token: res.data.token } });
     dispatch(LoadUser());
-    dispatch(GetRequest());
-    dispatch(GetAllLocationViolation());
   } catch (error) {
     toast.success(error);
   }
@@ -112,7 +110,6 @@ export const registerUser = (payload) => async (dispatch) => {
     localStorage.setItem('token', res.data.token);
 
     dispatch(LoadUser());
-    dispatch(GetRequest());
     payload.history.push('/login');
   } catch (error) {
     console.log(error);

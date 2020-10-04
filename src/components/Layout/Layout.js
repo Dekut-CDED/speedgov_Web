@@ -19,6 +19,7 @@ import BreadcrumbHistory from '../BreadcrumbHistory';
 import { openSidebar, closeSidebar } from '../../actions/navigation';
 import s from './Layout.module.scss';
 import AdminContainer from '../../pages/Admins/AdminContainer';
+import StudentContainer from '../../pages/Students/StudentContainer';
 
 class Layout extends React.Component {
   static propTypes = {
@@ -105,6 +106,11 @@ class Layout extends React.Component {
                       path="/app/admins"
                       exact
                       component={AdminContainer}
+                    />
+                    <Route
+                      path="/app/students"
+                      exact
+                      component={StudentContainer}
                     />
                   </Switch>
                 </CSSTransition>

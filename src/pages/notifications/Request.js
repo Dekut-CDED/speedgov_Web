@@ -1,10 +1,11 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { GetRequest } from '../../actions/Request';
+import { GetAnauthorizedRequests } from '../../actions/Request';
 import store from '../../store';
+import { approveRequest } from '../../actions/Request';
 
-const Request = ({ requests }) => {
+const Request = ({ approveRequest, requests }) => {
   useEffect(() => {
     const script = document.createElement('script');
     script.src = 'js/table.js';
@@ -12,6 +13,9 @@ const Request = ({ requests }) => {
     document.body.appendChild(script);
   }, []);
 
+  const onApprove = (id) => {
+    approveRequest(id);
+  };
   const studentsRequest = requests.map((req) => (
     <tr key={req._id}>
       <td>{req.user.name}</td>
@@ -19,7 +23,9 @@ const Request = ({ requests }) => {
       <td>{req.requestName}</td>
       <td>{req.locationName}</td>
       <td>
-        <button className="btn btn-success"> Approve Request</button>
+        <button className="btn btn-success" onClick={(e) => onApprove(req._id)}>
+          Approve Request
+        </button>
       </td>
 
       <td>
@@ -88,4 +94,4 @@ const Request = ({ requests }) => {
   );
 };
 
-export default Request;
+export default connect(null, { approveRequest })(Request);
