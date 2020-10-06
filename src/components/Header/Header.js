@@ -32,7 +32,7 @@ import {
   changeSidebarVisibility,
 } from '../../actions/navigation';
 
-import avatar from '../../images/people/a5.jpg';
+import avatar from '../../images/avatar.png';
 
 import s from './Header.module.scss';
 import 'animate.css';
@@ -186,10 +186,15 @@ class Header extends React.Component {
               >
                 <img src={avatar} alt="..." />
               </span>
-              <span className={`small ${s.accountCheck}`}></span>
-              <Badge className={s.badge} color="primary">
-                13
-              </Badge>
+              <span className={`small ${s.accountCheck}`}>
+                Welcome{' '}
+                <strong>
+                  {this.props.auth.user === null
+                    ? 'Admin'
+                    : this.props.auth.user.email}
+                </strong>
+              </span>
+              <Badge className={s.badge} color="primary"></Badge>
             </DropdownToggle>
           </Dropdown>
           <NavItem className="d-lg-none d-md-block d-sm-none">

@@ -105,7 +105,10 @@ export default {
             bounce: {
                 value: 4.5,
                 profit: false,
-            },
+            },import Rickshaw from './components/rickshaw/Rickshaw';
+
+            import AnimateNumber from 'react-animated-number';
+            
         },
         {
             product: 'Sing App',

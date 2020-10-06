@@ -12,9 +12,8 @@ import {
   CLEAR_REQUESTS,
   REGISTER_SUCCESS,
 } from './types';
-import { GetAnauthorizedRequests } from './Request';
-import { GetAllLocationViolation } from './Location';
 import { UpdateAdminLastLogin } from './Admins';
+import { GetAllLocationViolation } from './Location';
 
 export const LoadUser = () => async (dispatch) => {
   if (localStorage.token) {
@@ -87,6 +86,7 @@ export const loginUser = (creds) => async (dispatch) => {
     localStorage.setItem('authenticated', 'true');
     dispatch({ type: LOGIN_SUCCESS, payload: { token: res.data.token } });
     dispatch(LoadUser());
+    dispatch(GetAllLocationViolation());
   } catch (error) {
     toast.success(error);
   }

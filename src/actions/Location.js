@@ -22,7 +22,7 @@ export const GetAllLocationViolation = () => async (dispatch) => {
     const res = await axios.get(`${BASEURL}v1/locations`, config);
     dispatch({
       type: GETLOCATIONS_SUCCESS,
-      payload: res.data.data,
+      payload: { locations: res.data.data },
     });
   } catch (error) {
     dispatch({ type: GETLOCATIONS_FAILURE, payload: error });

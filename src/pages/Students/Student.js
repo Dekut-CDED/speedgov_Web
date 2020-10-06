@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import Moment from 'react-moment';
 
 const Students = ({ student }) => {
   useEffect(() => {
@@ -13,9 +14,15 @@ const Students = ({ student }) => {
       <td>{stud.name}</td>
       <td>{stud.registrationNumber}</td>
       <td>{stud.createdAt}</td>
-      <td>{stud.phoneNumber}</td>
-      <td>{stud.residence.name}</td>
-      <td>{stud.residence.roomNumber}</td>
+      <td>{stud.phoneNumber === null ? 'Not Available' : stud.phoneNumber}</td>
+      <td>
+        {stud.residence === undefined ? 'Not Available' : stud.residence.name}
+      </td>
+      <td>
+        {stud.residence === undefined
+          ? 'Not Available'
+          : stud.residence.roomNumber}
+      </td>
     </tr>
   ));
 

@@ -22,7 +22,7 @@ const AdminContainer = ({ GetAllAdmins, admins }) => {
 
 AdminContainer.propTypes = {
   GetAllAdmins: PropTypes.func.isRequired,
-  admins: PropTypes.array.isRequired,
+  admins: PropTypes.array,
 };
 
 const mapStateToProps = (state) => ({

@@ -20,6 +20,8 @@ import { openSidebar, closeSidebar } from '../../actions/navigation';
 import s from './Layout.module.scss';
 import AdminContainer from '../../pages/Admins/AdminContainer';
 import StudentContainer from '../../pages/Students/StudentContainer';
+import ApprovedRequests from '../../pages/notifications/ApprovedRequests';
+import Notifications from '../../pages/notifications';
 
 class Layout extends React.Component {
   static propTypes = {
@@ -111,6 +113,18 @@ class Layout extends React.Component {
                       path="/app/students"
                       exact
                       component={StudentContainer}
+                    />
+
+                    <Route
+                      path="/app/requests/"
+                      exact
+                      component={Notifications}
+                    />
+
+                    <Route
+                      path="/app/requests/approved"
+                      exact
+                      component={ApprovedRequests}
                     />
                   </Switch>
                 </CSSTransition>

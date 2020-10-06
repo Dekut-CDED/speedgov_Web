@@ -7,6 +7,10 @@ $(function () {
     responsive: true,
     autoWidth: false,
   });
+
+  $('#violationTable tbody').on('click', 'tr', function () {
+    $(this).toggleClass('selected');
+  });
   $('#example2').DataTable({
     paging: true,
     lengthChange: false,

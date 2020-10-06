@@ -26,7 +26,6 @@ StudentsContainer.propTypes = {
 };
 
 StudentsContainer.propTypes = {
-  admins: PropTypes.object.isRequired,
   dispatch: PropTypes.func.isRequired,
 };
 

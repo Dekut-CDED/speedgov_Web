@@ -125,7 +125,7 @@ class Sidebar extends React.Component {
             header="Students Requests"
             isHeader
             iconName="flaticon-layers"
-            link="/app/notifications"
+            link="/app/requests"
             index="ui"
           />
           <LinksGroup
@@ -136,8 +136,8 @@ class Sidebar extends React.Component {
             header="Approved Requests"
             isHeader
             iconName="flaticon-list"
-            link="/app/forms"
-            index="Approves"
+            link="/app/requests/approved"
+            index="Approved Request"
           />
         </ul>
         {/* eslint-enable */}
