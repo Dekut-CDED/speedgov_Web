@@ -32,4 +32,23 @@ export const GetAStudentLocationById = (id) => async (dispatch) => {};
 
 export const StreamLocationData = () => async (dispatch) => {};
 
-export const GetSpecificStudentViolations = (id) => async (dispatch) => {};
+export const GetSpecificStudentViolations = (id) => async (dispatch) => {
+  if (localStorage.token) {
+    setAuthToken(localStorage.token);
+  }
+
+  const config = {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  };
+  try {
+    const res = await axios.get(`${BASEURL}v1/locations/${id}`, config);
+    dispatch({
+      type: GETLOCATIONS_SUCCESS,
+      payload: { studentvios: res.data.location },
+    });
+  } catch (error) {
+    dispatch({ type: GETLOCATIONS_FAILURE, payload: error });
+  }
+};

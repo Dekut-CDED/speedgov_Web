@@ -7,6 +7,7 @@ import {
 const initialState = {
   locations: null,
   error: null,
+  studentvios: null,
 };
 
 export default function (state = initialState, action) {

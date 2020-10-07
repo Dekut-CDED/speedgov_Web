@@ -12,16 +12,14 @@ const Violations = ({ GetSpecificStudentViolations, violation }) => {
     document.body.appendChild(script);
   }, []);
 
-  const getAll = (userid) => {
-    console.log(userid);
-    GetSpecificStudentViolations(userid);
+  const onButtonClick = (elementid) => {
+    GetSpecificStudentViolations(elementid);
   };
-
   const violations = violation.map((locations) => (
-    <tr key={locations._id} onClick={() => getAll(locations.userId._id)}>
+    <tr key={locations._id}>
       <td>{locations.userId.name}</td>
-      <td>{locations.userId.registrationNumber}</td>
       <td>{locations.userId.email}</td>
+      <td>{locations.userId.registrationNumber}</td>
       <td>{locations.userId.phoneNumber}</td>
       <td>{locations.LocationName}</td>
       <td>
@@ -30,7 +28,7 @@ const Violations = ({ GetSpecificStudentViolations, violation }) => {
       <td>
         <button
           className="btn btn-warning"
-          onClick={() => getAll(locations.userId._id)}
+          onClick={() => onButtonClick(locations.userId._id)}
         >
           View Movements
         </button>
@@ -45,19 +43,19 @@ const Violations = ({ GetSpecificStudentViolations, violation }) => {
           {/* /.card */}
           <div className="card">
             <div className="card-header">
-              <h3 className="card-title">Admins Registered</h3>
+              <h3 className="card-title">A searchable List of Violations</h3>
             </div>
             {/* /.card-header */}
             <div className="card-body">
               <table
-                id="violation"
+                id="adminTable"
                 className="table table-bordered table-striped"
               >
                 <thead>
                   <tr>
                     <th>Name</th>
-                    <th>Reg Number</th>
                     <th>Email</th>
+                    <th>RegisteredNumber</th>
                     <th>PhoneNumeber</th>
                     <th>ViolationLocation</th>
                     <th>ViolationTime</th>
@@ -68,8 +66,8 @@ const Violations = ({ GetSpecificStudentViolations, violation }) => {
                 <tfoot>
                   <tr>
                     <th>Name</th>
-                    <th>Reg Number</th>
                     <th>Email</th>
+                    <th>RegisteredNumber</th>
                     <th>PhoneNumeber</th>
                     <th>ViolationLocation</th>
                     <th>ViolationTime</th>
