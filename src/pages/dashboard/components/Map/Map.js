@@ -1,15 +1,7 @@
 import React, { Component, useEffect, useState } from 'react';
-import L, {polyline} from 'leaflet';
-import {
-  Map,
-  GeoJSON,
-  TileLayer,
-  Circle,
-  Popup,
-  LayerGroup,
-  Marker,
-  Polyline
-} from 'react-leaflet';
+import L from 'leaflet';
+import { Map, TileLayer, Circle, Popup, Marker } from 'react-leaflet';
+
 import 'leaflet/dist/leaflet.css';
 import './map.css';
 import icon from 'leaflet/dist/images/marker-icon.png';
@@ -77,7 +69,6 @@ const MyMap = ({ violocation }) => {
         ) : (
           <Marker position={center}></Marker>
         )}
-        {violocation !== null ? (<Polyline positions={[violocation[0]._id],[]}>)}
       </Map>
     </div>
   );
