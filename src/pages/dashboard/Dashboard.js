@@ -36,18 +36,12 @@ class Dashboard extends React.Component {
     return (
       <div className={s.root}>
         <Row>
-          <Col>
-            <h1 className="page-title">Dashboard &nbsp;</h1>
-          </Col>
-          <Col>{/* <DashboardData />*/}</Col>
-        </Row>
-        <Row>
-          <Col lg={8}>
+          <Col lg={9}>
             <Widget className="bg-transparent">
               <LeafletMap />
             </Widget>
           </Col>
-          <Col lg={4} xs={12}>
+          <Col lg={3}>
             <Col>
               <ViolationContainer />
             </Col>
